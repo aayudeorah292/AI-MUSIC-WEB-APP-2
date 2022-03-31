@@ -1,3 +1,4 @@
+scorerightwrist = 0;
 song1_status = "";
 song2_status = "";
 scoreleftwrist = 0;
@@ -32,6 +33,13 @@ function draw(){
             song2.play();
         }
     }
+    if (scorerightwrist > 0.2) {
+        circle(rightwristx,rightwristy,20);
+        song2.stop();
+        if (song1_status == false) {
+            song1.play();
+        }
+    }
 }
 function modelLoaded(){
     console.log('posenet is Initialise');
@@ -45,6 +53,8 @@ function gotresult(results){
         rightwristy=results[0].pose.rightWrist.y;  
         scoreleftwrist = results[0].pose.keypoints[9].score;
         console.log("scoreleftwrist = " + scoreleftwrist);
+        scorerightwrist = results[0].pose.keypoints[10].score;
+        console.log("scorerightwrist = " + scorerightwrist);
      
     }
 }
